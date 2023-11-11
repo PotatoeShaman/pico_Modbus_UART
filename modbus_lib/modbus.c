@@ -8,5 +8,6 @@ Discord: @PotatoeComrade
 */
 
 
-#include "pico/stdlib.h"
-#include "pico/printf.h"
+#include "modbus.h"
+#include "../uart_lib/uart.h"
+

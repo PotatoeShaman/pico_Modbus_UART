@@ -18,7 +18,7 @@ pico_sdk_init()
 add_executable(${PROJECT_NAME} 
     main.c
     uart_lib/uart.c
-    #vmmio/vmmio.c
+    modbus_lib/modbus.c
     #core_1/core_1_process.c
 )
 
@@ -31,31 +31,36 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     pico_stdlib
     hardware_uart
     pico_multicore
+    pico_printf
     #hardware_i2c
     #hardware_timer
     #hardware_pwm
     #hardware_irq
     
-#    "${CMAKE_CURRENT_SOURCE_DIR}/rp2040_nodeConstants.h"
+    #"${CMAKE_CURRENT_SOURCE_DIR}/rp2040_nodeConstants.h"
 )
 
 add_library(uart_lib
     uart_lib/uart.c
     uart_lib/uart.h
 )
-#add_library(i2c i2c/i2c_protocal.c i2c/i2c_protocal.h)
+
+add_library(modbus_lib
+    modbus_lib/modbus.c
+    modbus_lib/modbus.h
+)
 #add_library(core_1 core_1/core_1_process.c core_1/core_1_process.h)
 
 target_link_libraries(uart_lib
     pico_stdlib
     hardware_uart
+    pico_printf
 )
 
-##target_link_libraries(i2c
-#    pico_stdlib
-#    hardware_i2c
-#    hardware_irq
-#)
+target_link_libraries(modbus_lib
+    pico_stdlib
+    pico_printf
+)
 
 #target_link_libraries(core_1
 #    pico_multicore

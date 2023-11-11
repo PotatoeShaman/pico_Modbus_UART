@@ -10,6 +10,8 @@ Discord: @PotatoeComrade
 
 #include <stdarg.h>
 #include "uart.h"
+#include "pico/printf.h"
+
 
 #include "../uart_modbus_constants.h"
 
@@ -64,6 +66,3 @@ void printf_uart(uart_inst_t* uart, const char* string, ...){
         printf(buff);
     #endif
 }
-
-#include "pico/stdio_usb.h"
-

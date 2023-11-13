@@ -16,6 +16,7 @@ such as pin assignments, address spaces, debugging, and system states
 ///////////////////////////////////
 //      USB Serial Debugging
 ///////////////////////////////////
+
 #define DEBUG_MODE
 
 #ifdef DEBUG_MODE
@@ -23,6 +24,11 @@ such as pin assignments, address spaces, debugging, and system states
 #else
     #define DEBUG_PRINTF(x) do { } while(0)
 #endif
+
+
+
+
+
 
 // UART_MODBUS_CONSTANTS_H //
 #endif

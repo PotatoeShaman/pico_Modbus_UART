@@ -14,12 +14,13 @@ Discord: @PotatoeComrade
 #include "pico/stdlib.h"
 #include "hardware/uart.h"
 
-void setup_uart0(uart_inst_t*);
-void free_uart0(uart_inst_t*);
-void setup_uart1(uart_inst_t*);
-void free_uart1(uart_inst_t*);
+#define MAX_BUFFER 128
+
+void setup_uart(uart_inst_t*);
+void free_uart(uart_inst_t*);
 void printf_uart(uart_inst_t*, const char*, ...);
 
+void read_uart(uart_inst_t*, char*, uint8_t);
 
 // UART_H //
 #endif

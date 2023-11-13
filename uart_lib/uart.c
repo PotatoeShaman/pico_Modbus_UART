@@ -33,11 +33,7 @@ Discord: @PotatoeComrade
     #define UART1_PARITY        0
 #endif
 
-void setup_uart0(uart_inst_t*);
-void free_uart0(uart_inst_t*);
-void setup_uart1(uart_inst_t*);
-void free_uart1(uart_inst_t*);
-void printf_uart(uart_inst_t*, const char*, ...);
+
 
 void setup_uart(uart_inst_t* uart){
     uint chan = uart_get_index(uart);
@@ -54,15 +50,29 @@ void free_uart(uart_inst_t* uart){
     gpio_set_function((chan ? UART0_RX_PIN : UART1_RX_PIN), GPIO_FUNC_NULL);
 }
 
+// Blocking serial print to uart
 void printf_uart(uart_inst_t* uart, const char* string, ...){
-    char buff[512];
+    char buff[MAX_BUFFER];
+    uint8_t len = 0;
+
     va_list args;
     va_start(args, string);
-    vsprintf(buff, string, args);
-    uart_puts(uart, buff);
-    va_end(args);
+    len = vsprintf(buff, string, args);
 
     #ifdef DEBUG_MODE
         printf(buff);
+    #else
+        uart_write_blocking(uart, buff, len);
+    #endif
+    va_end(args);
+}
+
+// Blocking serial read from uart
+void read_uart(uart_inst_t* uart, char* buffer, uint8_t len){
+    
+    #ifdef DEBUG_MODE
+        fgets(buffer, (len > MAX_BUFFER ? MAX_BUFFER : len), stdin);
+    #else
+        uart_read_blocking(uart, buffer, (len > MAX_BUFFER ? MAX_BUFFER : len));
     #endif
 }

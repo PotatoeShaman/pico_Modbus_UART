@@ -69,6 +69,4 @@ target_link_libraries(modbus_lib
 # Enable usb output, disable uart output
 pico_enable_stdio_usb(${PROJECT_NAME} 1)
 pico_enable_stdio_uart(${PROJECT_NAME} 1)
-# Messages should appear on both from printf()
-
-#pico_add_extra_outputs(${PROJECT_NAME})
+# Messages should appear on both with printf()

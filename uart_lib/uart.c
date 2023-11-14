@@ -2,6 +2,7 @@
 Alec Stobbs
 Discord: @PotatoeComrade
 
+
 11/09/2023
 
 
@@ -71,7 +72,18 @@ void printf_uart(uart_inst_t* uart, const char* string, ...){
 void read_uart(uart_inst_t* uart, char* buffer, uint8_t len){
     
     #ifdef DEBUG_MODE
-        fgets(buffer, (len > MAX_BUFFER ? MAX_BUFFER : len), stdin);
+        uint8_t i = 0;
+        uint8_t temp = fgetc(stdin);
+        while(temp != '\n' && i < len){
+            if (temp != EOF) {
+                buffer[i] = (uint8_t)temp;
+                //printf("%c", buffer[i]);
+                ++i;
+            }
+            temp = fgetc(stdin);
+        }
+
+        //fgets(buffer, (len > MAX_BUFFER ? MAX_BUFFER : len), stdin);
     #else
         uart_read_blocking(uart, buffer, (len > MAX_BUFFER ? MAX_BUFFER : len));
     #endif

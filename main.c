@@ -7,7 +7,6 @@ Discord: @PotatoeComrade
 
 */
 
-
 #include "pico/printf.h"
 #include "pico/stdlib.h"
 
@@ -26,17 +25,16 @@ mb_handler_t mbHandle = {
 
 void main(){
     stdio_init_all();
-    setup_uart(uart0);
+    busy_wait_ms(3000);
 
     start_modbus(&mbHandle);
 
-    char buf[MB_MAX_BUFFER];
+    //uint8_t buf[MB_MAX_BUFFER];
+    //uint16_t* pbuf = mbHandle.buffer;
+    //uint8_t* buf = (uint8_t*)pbuf;
 
     while(1){
-        busy_wait_ms(1000);
-        //printf(":%02X%02X%02X%02X%02X%02X\r\n", MB_ADDR, 0x01, 0x02, 0x0A, 0x11, 0xDE);
-        fgets(&buf[0], MB_MAX_BUFFER, stdin);
-        printf_uart(uart0, ":0401020A11DE\r\n");
-        //printf("%c%c%c%c%c%c%c", 0x00, 0x01, 0x02, 0x0A, 0x11, 0xB3, 0x50);
+        tight_loop_contents();
+        //fgets(buf, 3, stdin);
     }
 }

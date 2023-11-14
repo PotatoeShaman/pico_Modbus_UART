@@ -14,6 +14,7 @@ Discord: @PotatoeComrade
 #include "pico/stdlib.h"
 #include "pico/printf.h"
 
+#include "../uart_modbus_constants.h"
 
 ///////////////////////////////////
 //      Modbus Configuration
